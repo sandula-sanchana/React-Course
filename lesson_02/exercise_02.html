@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Basics</title>
+    <style>
+        .products-container {
+            display: flex;
+            gap: 20px;
+        }
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="js-container"></div>
+
+<script src="https://unpkg.com/supersimpledev/react.js"></script>
+<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+<script type="text/babel">
+
+    const Product = ({ name, price,discount,imgSrc }) => (
+        <div className="product">
+            <img className="product__img" src={imgSrc} width="150px"  alt={name}/>
+            <p>{name}</p>
+            {discount?<p><del>price : {price}</del></p>:<p>price : {price}</p>}
+            {discount?<p>Discount: {discount}</p> :null}
+            <button>Add to Cart</button>
+        </div>
+    );
+
+    const App = () => (
+        <div className="products-container">
+            <Product name="Socks" price="10.66" discount="5" imgSrc="sock.webp"/>
+            <Product name="Tennis Ball" price="5.86" imgSrc="sock.webp"/>
+            <Product name="T-Shirt" price="108.66" imgSrc="sock.webp"/>
+        </div>
+    );
+
+    const mainContainer = document.querySelector(".js-container");
+    ReactDOM.createRoot(mainContainer).render(<App />);
+</script>
+</body>
+</html>
