@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Basics</title>
+</head>
+<body>
+<div class="js-container"></div>
+
+<script src="https://unpkg.com/supersimpledev/react.js"></script>
+<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+<script type="text/babel">
+
+
+   const container=(<div>
+       <button>click me</button>
+       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum cumque, dolores facilis impedit laborum neque nobis nostrum officia sint voluptatem! Molestias odit reprehenderit suscipit voluptatibus. Autem eligendi mollitia recusandae totam!</p>
+   </div>);
+
+   const mainContainer=document.querySelector(".js-container");
+
+   ReactDOM.createRoot(mainContainer).render(container)
+</script>
+</body>
+</html>
