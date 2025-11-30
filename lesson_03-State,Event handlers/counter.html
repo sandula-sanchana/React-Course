@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>counter</title>
+</head>
+<body>
+<div class="js-container"></div>
+
+<script src="https://unpkg.com/supersimpledev/react.js"></script>
+<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+<script type="text/babel">
+
+    function Counter() {
+        let [count,setCount]=React.useState(0);
+
+
+        return (
+            <>
+                <h1>{count}</h1>
+                <button onClick={()=>{setCount(count+1)}}>increment</button>
+                <button onClick={()=>{setCount(count-1)}}>decrement</button>
+            </>
+        )
+    }
+
+
+
+    const App=()=>{
+        return (
+            <><Counter/></>
+        )
+    }
+
+
+    const mainContainer=document.querySelector(".js-container");
+
+    ReactDOM.createRoot(mainContainer).render(<App/>)
+</script>
+</body>
+</html>

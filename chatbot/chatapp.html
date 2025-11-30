@@ -34,25 +34,45 @@
         );
     }
 
-    const App=()=>{
-        return (<>
+    const MassageElement=()=>{
 
+        const chatMessages=[{
+            message:"Hello Chat",
+            sender:"user",
+            key:"k1"
+        },{
+            message:"Hello Chat-bot!",
+            sender:"bot",
+            key:"k2"
+        },{
+            message:"Hello Chat",
+            sender:"user",
+            key:"k3"
+        },{
+            message:"Hello Chat-bot!",
+            sender:"bot",
+            key:"k4"
+        }]
+
+        return (
+            <div>
+                {chatMessages.map(obj => (
+                    <ChatMessages
+                        key={obj.key}
+                        message={obj.message}
+                        sender={obj.sender}
+                    />
+                ))}
+            </div>
+        );
+    }
+
+    const App=()=>{
+
+
+        return (<>
                     <InputElement />
-                    <ChatMessages
-                        message="hi"
-                        sender="user"
-                    />
-                    <ChatMessages
-                        message="bot-hi"
-                        sender="bot"
-                    />
-                    <ChatMessages
-                        message="hi"
-                        sender="user"
-                    />
-                    <ChatMessages
-                        message="bot-hi"
-                        sender="bot"/>
+                    <MassageElement />
             </>
         )
     }
