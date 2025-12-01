@@ -2,27 +2,110 @@
 <html>
 <head>
     <title>chatapp</title>
+    <style>
+
+        body{
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+        .send-button {
+            border: 2px black solid;
+            border-radius: 8px;
+            background-color: green;
+            width: 100px;
+            height: 52px;
+            color: white;
+            font-size: 20px;
+           align-self: center;
+        }
+        .input-field {
+            border: 2px black solid;
+            border-radius: 8px;
+            height: 50px;
+            margin: 20px;
+            padding: 5px;
+            font-size: 20px;
+            max-width: 1000px;
+            flex-grow: 1;
+        }
+
+        .input-container {
+            border: 2px black solid;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .app-container {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            overflow: scroll;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        .user-msg {
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px;
+        }
+
+        .bot-msg {
+            display: flex;
+            justify-content: flex-start;
+            margin: 10px;
+        }
+
+        .message-bubble {
+            padding: 10px 15px;
+            border-radius: 12px;
+            max-width: 60%;
+            font-size: 18px;
+        }
+
+        .user-bubble {
+            background-color: #dcf8c6;
+        }
+
+        .bot-bubble {
+            background-color: #f1f0f0;
+        }
+
+    </style>
 </head>
 <body>
 <div class="js-container"></div>
 
 <script src="https://unpkg.com/supersimpledev/react.js"></script>
 <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
-
+<script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
 <script src="https://unpkg.com/supersimpledev/babel.js"></script>
 <script type="text/babel">
 
-    const ChatMessages=(props)=>{
+    const ChatMessages = (props) => {
         return (
-            <div>
-                {props.sender==="bot" && (
-                    <img src="bot.png"  alt="pic" width="50" height="50"/>)}
-                {props.message}
-                {props.sender==="user" && (
-                    <img src="user.png"  alt="pic" width="50" height="50"/>)}
+            <div className={props.sender === "user" ? "user-msg" : "bot-msg"}>
+
+                {props.sender === "bot" && (
+                    <img src="bot.png" alt="pic" width="40" height="40" />
+                )}
+
+                <div className={
+                    props.sender === "user"
+                        ? "message-bubble user-bubble"
+                        : "message-bubble bot-bubble"
+                }>
+                    {props.message}
+                </div>
+
+                {props.sender === "user" && (
+                    <img src="user.png" alt="pic" width="40" height="40" />
+                )}
             </div>
-        )
-    }
+        );
+    };
+
 
     const InputElement=({massage,setMessage})=>{//component-piece of website
 
@@ -33,30 +116,46 @@
         }
 
         function sendChatMessages(){
-            setMessage([...massage,{
+            const  newMassages=([...massage,{
                 message:textInput,
                 sender:"user",
                 key:crypto.randomUUID()
             }])
 
+            setMessage(newMassages);
+
+            const response=Chatbot.getResponse(textInput);
+
+            setMessage([...newMassages,{
+                message:response,
+                sender:"bot",
+                key:crypto.randomUUID()
+            }]);
+
             setTextInput('');
         }
 
-        return (<div>
+
+
+        return (<div className="input-container">
                   <input
                       type="text" placeholder="say something"
                       onChange={getTheInput}
+                      className="input-field"
                       value={textInput}
                   />
-                  <button onClick={sendChatMessages} >Send</button>
+                  <button className="send-button" onClick={sendChatMessages} >Send</button>
                 </div>
         );
     }
 
     const MassageElement=({massage})=>{
 
+        React.useEffect(()=>{
+
+        })
         return (
-            <div>
+            <div className="app-container">
                 {massage.map(obj => (
                     <ChatMessages
                         key={obj.key}
@@ -88,10 +187,10 @@
             key:"k4"
         }]);
 
-        return (<>
+        return (<div >
                     <InputElement massage={massage} setMessage={setMessage}/>
                     <MassageElement massage={massage}/>
-            </>
+            </div>
         )
     }
 
