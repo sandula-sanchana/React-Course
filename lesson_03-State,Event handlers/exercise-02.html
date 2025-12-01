@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Basics</title>
+</head>
+<body>
+<div class="js-container"></div>
+
+<script src="https://unpkg.com/supersimpledev/react.js"></script>
+<script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+<script src="https://unpkg.com/supersimpledev/babel.js"></script>
+<script type="text/babel">
+
+    const DisplayContent=()=>{
+         const [content,setContent]=React.useState("")
+
+         function addContent(event){
+             setContent(event.target.value)
+         }
+         function removeContent(event){
+             setContent('')
+         }
+         function setExample(){
+             setContent("sandula")
+         }
+         return (
+             <div>
+                 <p>Hello : {content}</p>
+                 <input onChange={addContent} placeholder="type anything" value={content}/>
+                 <button onClick={removeContent}>reset</button>
+                 <button onClick={setExample}>example</button>
+             </div>
+         )
+    }
+
+    const App=()=>{
+         return (
+             <DisplayContent/>
+         )
+    }
+
+    const mainContainer=document.querySelector(".js-container");
+
+    ReactDOM.createRoot(mainContainer).render(<App/>)
+</script>
+</body>
+</html>
