@@ -24,19 +24,53 @@
         )
     }
 
-    const InputElement=()=>{ //component-piece of website
+    const InputElement=({massage,setMessage})=>{//component-piece of website
+
+        let [textInput,setTextInput]=React.useState('');
+
+        function getTheInput(event){//event is a object the give details about the event and the target gives the elements of it
+            setTextInput(event.target.value);
+        }
+
+        function sendChatMessages(){
+            setMessage([...massage,{
+                message:textInput,
+                sender:"user",
+                key:crypto.randomUUID()
+            }])
+
+            setTextInput('');
+        }
+
         return (<div>
                   <input
                       type="text" placeholder="say something"
+                      onChange={getTheInput}
+                      value={textInput}
                   />
-                  <button>Send</button>
+                  <button onClick={sendChatMessages} >Send</button>
                 </div>
         );
     }
 
-    const MassageElement=()=>{
+    const MassageElement=({massage})=>{
 
-        const chatMessages=[{
+        return (
+            <div>
+                {massage.map(obj => (
+                    <ChatMessages
+                        key={obj.key}
+                        message={obj.message}
+                        sender={obj.sender}
+                    />
+                ))}
+            </div>
+        );
+    }
+
+    const App=()=>{
+
+        const [massage,setMessage]=React.useState([{ //lifting the state up(tree)
             message:"Hello Chat",
             sender:"user",
             key:"k1"
@@ -52,27 +86,11 @@
             message:"Hello Chat-bot!",
             sender:"bot",
             key:"k4"
-        }]
-
-        return (
-            <div>
-                {chatMessages.map(obj => (
-                    <ChatMessages
-                        key={obj.key}
-                        message={obj.message}
-                        sender={obj.sender}
-                    />
-                ))}
-            </div>
-        );
-    }
-
-    const App=()=>{
-
+        }]);
 
         return (<>
-                    <InputElement />
-                    <MassageElement />
+                    <InputElement massage={massage} setMessage={setMessage}/>
+                    <MassageElement massage={massage}/>
             </>
         )
     }
