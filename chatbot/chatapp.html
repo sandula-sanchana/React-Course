@@ -138,6 +138,11 @@
             setTextInput('');
         }
 
+        function handleKeyDown(event){
+            if(event.key==="Enter"){
+                sendChatMessages();
+            }
+        }
 
 
         return (<div className="input-container">
@@ -146,6 +151,7 @@
                       onChange={getTheInput}
                       className="input-field"
                       value={textInput}
+                      onKeyDown={handleKeyDown}
                   />
                   <button className="send-button" onClick={sendChatMessages} >Send</button>
                 </div>
