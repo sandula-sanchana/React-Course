@@ -118,22 +118,36 @@
             setTextInput(event.target.value);
         }
 
-        function sendChatMessages(){
+        async function sendChatMessages(){
+
+            const loading_id=crypto.randomUUID()
+
             const  newMassages=([...massage,{
                 message:textInput,
                 sender:"user",
                 key:crypto.randomUUID()
+            },{
+                message:"loading...",
+                sender:"bot",
+                key:loading_id
             }])
 
             setMessage(newMassages);
 
-            const response=Chatbot.getResponse(textInput);
+            const response=await Chatbot.getResponseAsync(textInput);
 
-            setMessage([...newMassages,{
-                message:response,
-                sender:"bot",
-                key:crypto.randomUUID()
-            }]);
+            const updatedArray=newMassages.map((i)=>{//we need to make a new array cause react only render when the reference are changed,it not checks for content same with massage objects
+                if(i.key===loading_id){
+                    return {
+                        ...i,
+                        message:response,
+                    }
+                }else {
+                    return i;
+                }
+            })
+
+            setMessage(updatedArray);
 
             setTextInput('');
         }
@@ -141,6 +155,8 @@
         function handleKeyDown(event){
             if(event.key==="Enter"){
                 sendChatMessages();
+            } else if (event.key === 'Escape') {
+                setInputText('');
             }
         }
 
