@@ -1,0 +1,16 @@
+
+      
+        
+
+        .app-container {
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            overflow: scroll;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            height: 750px;
+            background-color: lightgray;
+        }
+
+        

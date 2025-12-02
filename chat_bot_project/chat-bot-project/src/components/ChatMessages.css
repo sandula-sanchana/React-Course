@@ -1,0 +1,26 @@
+.user-msg {
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px;
+        }
+
+        .bot-msg {
+            display: flex;
+            justify-content: flex-start;
+            margin: 10px;
+        }
+
+        .message-bubble {
+            padding: 10px 15px;
+            border-radius: 12px;
+            max-width: 60%;
+            font-size: 18px;
+        }
+
+        .user-bubble {
+            background-color: #dcf8c6;
+        }
+
+        .bot-bubble {
+            background-color: #f1f0f0;
+        }
