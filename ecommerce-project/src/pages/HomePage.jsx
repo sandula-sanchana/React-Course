@@ -1,3 +1,5 @@
+import './header.css'
+import './HomePage.css'
 
 export const  HomePage = () => {
 
