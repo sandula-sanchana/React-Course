@@ -5,10 +5,12 @@ export const Checkout=()=>{
 
     return (
         <>
+
+        <title>Checkout</title>
          <div class="checkout-header">
       <div class="header-content">
         <div class="checkout-header-left-section">
-          <a href="index.html">
+          <a href="/">
             <img class="logo" src="images/logo.png" />
             <img class="mobile-logo" src="images/mobile-logo.png" />
           </a>
@@ -16,7 +18,7 @@ export const Checkout=()=>{
 
         <div class="checkout-header-middle-section">
           Checkout (<a class="return-to-home-link"
-            href="index.html">3 items</a>)
+            href="/">3 items</a>)
         </div>
 
         <div class="checkout-header-right-section">
