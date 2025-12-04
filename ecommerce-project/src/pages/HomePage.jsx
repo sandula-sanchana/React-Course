@@ -2,12 +2,17 @@ import { Header } from '../components/Header'
 import './HomePage.css'
 import { products } from "../../data/products.js";
 
+import axios from "axios";
+
 export const HomePage = () => {
 
     return (
         <>
-            <Header />
+            {
+                axios.get('http://localhost:3000/api/products/')
+            }
 
+            <Header />
             <div className="home-page">
                 <div className="products-grid">
 
