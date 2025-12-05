@@ -1,6 +1,17 @@
 import './header.css'
 
-export const Header=()=>{
+export const Header=({cart})=>{
+
+    function quantityInCart(cart){
+
+        let currentQuantity=0;
+
+        cart.forEach(element => {
+            currentQuantity+=element.quantity;
+        });
+
+        return currentQuantity;
+    }
 
     return(
         <>
@@ -30,7 +41,7 @@ export const Header=()=>{
 
                     <a className="cart-link header-link" href="/checkout">
                         <img className="cart-icon" src="images/icons/cart-icon.png"/>
-                        <div className="cart-quantity">3</div>
+                        <div className="cart-quantity">{quantityInCart(cart)}</div>
                         <div className="cart-text">Cart</div>
                     </a>
                 </div>
