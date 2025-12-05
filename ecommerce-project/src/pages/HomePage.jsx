@@ -1,7 +1,6 @@
 import { Header } from '../components/Header'
 import './HomePage.css'
 import { useEffect, useState } from 'react';
-// import { products } from "../../data/products.js";
 
 import axios from "axios";
 
