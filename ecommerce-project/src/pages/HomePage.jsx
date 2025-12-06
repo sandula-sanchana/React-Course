@@ -3,24 +3,21 @@ import './HomePage.css'
 import { useEffect, useState } from 'react';
 
 import axios from "axios";
+import { PriceCalc } from '../utils/PiceCalc';
 
-export const HomePage = () => {
+export const HomePage = ({cart}) => {
     const [products, setProducts] = useState([]);
-    const [cart,setCart]=useState([]);
+    
 
     useEffect(() => {
 
-        axios.get('http://localhost:3000/api/products/').then(
+        axios.get('/api/products/').then(
             function (response) {
                 setProducts(response.data)
             }
         )
 
-        axios.get('http://localhost:3000/api/cart-items/').then(
-             function(response){
-                setCart(response.data)
-             }
-        ) 
+      
     }, []);
 
 
@@ -54,7 +51,7 @@ export const HomePage = () => {
                                     </div>
 
                                     <div className="product-price">
-                                        {(product.priceCents / 100).toFixed(2)}
+                                        {PriceCalc(product.priceCents)}
                                     </div>
 
                                     <div className="product-quantity-container">
