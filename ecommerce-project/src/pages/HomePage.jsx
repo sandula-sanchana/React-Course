@@ -10,13 +10,14 @@ export const HomePage = ({cart}) => {
     
 
     useEffect(() => {
+        async function fetchProducts() {
+                let response=await axios.get('/api/products/');
+                 setProducts(response.data);
 
-        axios.get('/api/products/').then(
-            function (response) {
-                setProducts(response.data)
-            }
-        )
 
+        }
+
+        fetchProducts();
       
     }, []);
 
